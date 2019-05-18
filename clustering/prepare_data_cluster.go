@@ -1,5 +1,5 @@
 
-package main
+package clustering
 
 import (
 	"bufio"
@@ -41,12 +41,7 @@ func main() {
 	vertices := make(map[string]*vertex)
 	var arcs []*arc
 
-	done := false
-	filepath.Walk("./data/bitcoin_1_month", func(path string, info os.FileInfo, err error) error {
-		if done {
-			return nil
-		}
-
+	filepath.Walk("../data/bitcoin_1_month", func(path string, info os.FileInfo, err error) error {
 		if info.IsDir() {
 			return nil
 		}
@@ -160,7 +155,7 @@ func main() {
 		return nil
 	})
 
-	filename := "./data/bitcoin.net"
+	filename := "../data/bitcoin_clustered.net"
 	if _, err := os.Stat(filename); err != nil {
 		if !os.IsNotExist(err) {
 			panic(err)
