@@ -1,5 +1,4 @@
-
-package clustering
+package main
 
 import (
 	"bufio"
@@ -211,7 +210,7 @@ func main() {
 	})
 	f.Close()
 
-	for k := len(cl) -1; k > len(cl) - 10; k-- {
+	for k := len(cl) - 1; k > len(cl)-10; k-- {
 		v := clusters[cl[k]]
 		fmt.Printf("Cluster %d => %d vertices\n", k, len(v))
 		/*for _, vx := range v {
