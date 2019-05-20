@@ -127,7 +127,7 @@ func main() {
 	c := 1
 	for _, vertex := range vertices {
 		vertex.Index = c
-		f.WriteString(fmt.Sprintf("%d \"%s\"\n", c, vertex.Label))
+		f.WriteString(fmt.Sprintf("%d \"%s\"\n", c, vertex.Address))
 		c++
 	}
 
