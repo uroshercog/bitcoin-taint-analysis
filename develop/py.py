@@ -44,13 +44,15 @@ def trace_taint(G, root):
 # Thief = 1MAazCWMydsQB5ynYXqSGQDjNQMN3HFmEu
 G = nx.read_edgelist("../data/bitcoin.edgelist",create_using=nx.DiGraph())
 thief_addr = '1MAazCWMydsQB5ynYXqSGQDjNQMN3HFmEu'
-print(nx.is_directed(G))
 print_G_info(G)
+
+# Returns subgraph, including all addresses that are reachable from thief_addr
+# tainted_G = nx.ego_graph(G, thief_addr, radius=G.number_of_nodes())
 
 # Trace taintedness starting from root, going to all neighbors
 tainted_addresses = trace_taint(G, thief_addr)
 print("Number of tainted addresses: ", len(tainted_addresses))
-# Dictionary of taint scores of each node
+# # Dictionary of taint scores of each node
 taint_scores = nx.get_node_attributes(G,'taint_rank')
 sorted_taint_cores = sorted(taint_scores.items(), key=lambda kv: kv[1], reverse=True)
-print(sorted_taint_cores[:100])
+print(sorted_taint_cores[:10])
