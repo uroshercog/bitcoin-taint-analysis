@@ -104,7 +104,7 @@ func main() {
 		return nil
 	})
 
-	filename := "./data/bitcoin.net"
+	filename := "./data/bitcoin.edgelist"
 	if _, err := os.Stat(filename); err != nil {
 		if !os.IsNotExist(err) {
 			panic(err)
@@ -121,23 +121,8 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Printf("Vertices: %d\n", len(vertices))
-	f.WriteString("*vertices " + strconv.Itoa(len(vertices)) + "\n")
-
-	c := 1
-	for _, vertex := range vertices {
-		vertex.Index = c
-		f.WriteString(fmt.Sprintf("%d \"%s\"\n", c, vertex.Address))
-		c++
-	}
-
-	fmt.Printf("Arcs: %d\n", len(arcs))
-	f.WriteString("*arcs " + strconv.Itoa(len(arcs)) + "\n")
 	for _, arc := range arcs {
-		f.WriteString(fmt.Sprintf("%d %d %d\n", arc.From.Index, arc.To.Index, arc.Weight))
-		if arc.Weight == 0 {
-			fmt.Printf("Arc (%d, %d) has weight 0\n", arc.From.Index, arc.To.Index)
-		}
+		f.WriteString(fmt.Sprintf("%s %s %s\n", arc.From.Address, arc.To.Address, "{'weight': "+strconv.FormatUint(arc.Weight, 10)+"}"))
 	}
 
 	f.Close()

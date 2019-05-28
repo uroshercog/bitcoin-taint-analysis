@@ -1,1 +1,3 @@
 python-igraph
+networkx
+matplotlib
